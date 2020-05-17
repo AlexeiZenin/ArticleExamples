@@ -1,0 +1,23 @@
+{
+  "namespace": "com.zenin.events",
+  "type": "record",
+  "name": "Train",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "weightInTonnes",
+      "type": "int"
+    },
+    {
+      "name": "speedInMetric",
+      "type": "int"
+    },
+    {
+      "name": "momentumLimit",
+      "type": "long"
+    }
+  ]
+}

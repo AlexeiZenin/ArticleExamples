@@ -1,0 +1,13 @@
+spring:
+  kafka:
+    consumer:
+      group-id: "train-momentum-alerter"
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer2
+      properties:
+        spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    listener:
+      ack-mode: BATCH
+      log-container-config: true
+      type: BATCH
