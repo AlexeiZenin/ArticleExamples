@@ -36,4 +36,21 @@ public class TrainEventListener {
             );
         }
     }
+
+    private void analyzeTrainNullSafe(Train train) {
+        log.info("Received a train event: [{}]", train);
+
+        if (train == null) {
+            log.warn("Train was null! Either was literal null or bad Confluent Avro!");
+            return;
+        }
+
+        if (train.getSpeedInMetric() > SPEED_LIMIT) {
+            log.warn("Speed alert! Train [{}] exceeded the speed limit. Limit [{}], Actual [{}]",
+                    train.getId(),
+                    SPEED_LIMIT,
+                    train.getSpeedInMetric()
+            );
+        }
+    }
 }
