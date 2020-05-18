@@ -42,8 +42,7 @@ class TrainIntegrationTest {
     void sendTrainEvents() throws ExecutionException, InterruptedException {
         Train train = Train.newBuilder()
                 .setId(UUID.randomUUID().toString())
-                .setMomentumLimit(4_000_000)
-                .setSpeedInMetric(80)
+                .setSpeedInMetric(85)
                 .setWeightInTonnes(11700)
                 .build();
 

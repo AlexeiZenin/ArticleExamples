@@ -12,9 +12,14 @@ import java.util.List;
 @Slf4j
 public class TrainEventListener {
 
+    /**
+     * In Km/h
+     */
+    public static final int SPEED_LIMIT = 80;
+
     @KafkaListener(topicPattern = ".*")
     public void processTrainEvent(List<Train> trains) {
-        log.info("Received a train [{}] events", trains.size());
+        log.info("Received [{}] train events", trains.size());
         for (Train train : trains) {
             analyzeTrain(train);
         }
@@ -24,21 +29,12 @@ public class TrainEventListener {
     private void analyzeTrain(Train train) {
         log.info("Received a train event: [{}]", train);
 
-        double momentum = getMetersPerSecond(train) * getWeightInKilos(train);
-        if (momentum > train.getMomentumLimit()) {
-            log.warn("Momentum alert! Train [{}] exceeded its momentum limit. Limit [{}], Actual [{}]",
+        if (train.getSpeedInMetric() > SPEED_LIMIT) {
+            log.warn("Speed alert! Train [{}] exceeded the speed limit. Limit [{}], Actual [{}]",
                     train.getId(),
-                    train.getMomentumLimit(),
-                    momentum
+                    SPEED_LIMIT,
+                    train.getSpeedInMetric()
             );
         }
-    }
-
-    private int getWeightInKilos(Train train) {
-        return train.getWeightInTonnes() * 1000;
-    }
-
-    private double getMetersPerSecond(Train train) {
-        return train.getSpeedInMetric() / 3.6;
     }
 }
