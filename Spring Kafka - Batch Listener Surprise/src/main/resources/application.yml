@@ -1,7 +1,7 @@
 spring:
   kafka:
     consumer:
-      group-id: "train-momentum-alerter"
+      group-id: "train-speed-alerter"
       auto-offset-reset: earliest
       enable-auto-commit: false
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer2
